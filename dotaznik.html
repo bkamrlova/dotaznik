@@ -619,9 +619,9 @@
         </thead>
         <tbody>
           <tr>
-            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><input type="text" id="extra_1_oblast" value="učenie" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"></td>
-            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><textarea id="extra_1_druh" rows="2" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark); resize:none">práca s ľuďmi, vymýšľanie rôznych prístupov aj on-line</textarea></td>
-            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><select id="extra_1_stupen" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option></select></td>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><input type="text" id="extra_1_oblast" placeholder="" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"></td>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><textarea id="extra_1_druh" rows="2" placeholder="" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark); resize:none"></textarea></td>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><select id="extra_1_stupen" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td>
           </tr>
           <tr>
             <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><input type="text" id="extra_2_oblast" placeholder="" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"></td>
@@ -637,7 +637,6 @@
       </table>
     </div>
 
-    <div id="error-8" class="error-msg">Prosím, napíš aspoň pár slov.</div>
     <div class="nav-buttons">
       <button class="btn btn-secondary" onclick="prevSection(8)">← Späť</button>
       <button class="btn btn-primary" onclick="submitForm()">Odoslať dotazník ✓</button>
@@ -1104,8 +1103,7 @@ function validateSection(n) {
   }
 
   if (n === 8) {
-    const val = document.getElementById('zaver-kompetencia').value.trim();
-    if (val.length < 5) { err.style.display = 'block'; return false; }
+    return true;
   }
 
   return true;
