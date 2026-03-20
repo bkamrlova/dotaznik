@@ -606,6 +606,37 @@
       <textarea id="zaver-kompetencia" rows="5" placeholder="Môže to byť čokoľvek – oblasť, situácia, zručnosť..."></textarea>
     </div>
 
+    <div class="field" style="margin-top:2rem">
+      <label>Ak vnímaš, že si tvorivá/tvorivý iným spôsobom, než sa uvádza v dotazníkoch, zapíš to sem, prosím – druh tvorivosti, rozsah a stupeň, na ktorom si v nej tvorivá/tvorivý 1–5.</label>
+      <p style="font-size:0.82rem; color:var(--muted); margin:0.4rem 0 0.8rem; line-height:1.6">Napríklad: oblasť – <em>záhradníctvo</em>, druh a rozsah – <em>úprava stromov a tvorenie zákutí v blízkom okolí</em>, stupeň – <em>3</em></p>
+      <table style="width:100%; border-collapse:collapse; font-size:0.88rem">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding:6px 8px; border-bottom:1.5px solid var(--border); color:var(--muted); font-weight:600; width:20%">Oblasť</th>
+            <th style="text-align:left; padding:6px 8px; border-bottom:1.5px solid var(--border); color:var(--muted); font-weight:600; width:55%">Druh a rozsah tvorivosti</th>
+            <th style="text-align:left; padding:6px 8px; border-bottom:1.5px solid var(--border); color:var(--muted); font-weight:600; width:25%">Stupeň</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><input type="text" id="extra_1_oblast" value="učenie" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"></td>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><textarea id="extra_1_druh" rows="2" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark); resize:none">práca s ľuďmi, vymýšľanie rôznych prístupov aj on-line</textarea></td>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><select id="extra_1_stupen" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option></select></td>
+          </tr>
+          <tr>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><input type="text" id="extra_2_oblast" placeholder="" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"></td>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><textarea id="extra_2_druh" rows="2" placeholder="" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark); resize:none"></textarea></td>
+            <td style="padding:6px 4px; border-bottom:1px solid var(--border)"><select id="extra_2_stupen" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td>
+          </tr>
+          <tr>
+            <td style="padding:6px 4px"><input type="text" id="extra_3_oblast" placeholder="" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"></td>
+            <td style="padding:6px 4px"><textarea id="extra_3_druh" rows="2" placeholder="" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark); resize:none"></textarea></td>
+            <td style="padding:6px 4px"><select id="extra_3_stupen" style="width:100%; padding:5px 8px; border:1.5px solid var(--border); border-radius:6px; font-family:inherit; font-size:0.88rem; background:var(--bg); color:var(--dark)"><option value="">–</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div id="error-8" class="error-msg">Prosím, napíš aspoň pár slov.</div>
     <div class="nav-buttons">
       <button class="btn btn-secondary" onclick="prevSection(8)">← Späť</button>
@@ -1288,6 +1319,15 @@ function submitForm() {
     pohlavie: document.querySelector('input[name="pohlavie"]:checked')?.value,
     zaujem: document.getElementById('zaujem').value.trim(),
     zaver: document.getElementById('zaver-kompetencia').value.trim(),
+    extra_1_oblast: document.getElementById('extra_1_oblast').value.trim(),
+    extra_1_druh: document.getElementById('extra_1_druh').value.trim(),
+    extra_1_stupen: document.getElementById('extra_1_stupen').value,
+    extra_2_oblast: document.getElementById('extra_2_oblast').value.trim(),
+    extra_2_druh: document.getElementById('extra_2_druh').value.trim(),
+    extra_2_stupen: document.getElementById('extra_2_stupen').value,
+    extra_3_oblast: document.getElementById('extra_3_oblast').value.trim(),
+    extra_3_druh: document.getElementById('extra_3_druh').value.trim(),
+    extra_3_stupen: document.getElementById('extra_3_stupen').value,
     grit_total: grit.total,
     grit_perseverance: grit.perseverance,
     grit_consistency: grit.consistency,
@@ -1326,7 +1366,7 @@ function submitForm() {
   data['aut_odpovede'] = document.getElementById('aut-tehla').value.trim();
 
   // Send to Google Sheets (URL to be configured)
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzp8R2_vP1ZSwx0s10Rhpnp331MDMmCTrnke2lK-XWE7HpLgg0sWYd2p0QJTapsDZAn5g/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyDXCoXPl21hbwU6i9I1ACPyP3DrFBzPSTzuUgz4Z55X8Mk8Bsg4bwxof0ZnH6zwNxmiw/exec';
   if (SCRIPT_URL !== 'GOOGLE_SCRIPT_URL_HERE') {
     fetch(SCRIPT_URL, {
       method: 'POST',
@@ -1352,7 +1392,7 @@ function showResults(grit, brief2, kdocs, aut, caq) {
 
   // K-DOCS komentár
   function kdocsComment(avg) {
-    if (avg > 3.5) return '<div class="result-label" style="color:var(--terra)">Hodnotíte svoju tvorivosť výrazne vyššie ako väčšina rovesníkov.</div>';
+    if (avg > 3.5) return '<div class="result-label" style="color:var(--terra)">Vaša vnímaná tvorivosť je výrazne vyššia než tvorivosť vašich bežných rovesníkov.</div>';
     return '';
   }
 
@@ -1365,9 +1405,11 @@ function showResults(grit, brief2, kdocs, aut, caq) {
   // CAQ komentár
   function caqComment(total, byArea) {
     const maxDomain = Object.values(byArea).reduce((a,b) => a.score > b.score ? a : b);
+    const multiDomain = Object.values(byArea).filter(a => a.score > 2).length;
     let txt = '';
     if (maxDomain.score > 4) txt += 'Vo vašom veku je znakom výraznej tvorivosti dosiahnuť v niektorej oblasti skóre vyššie než 4 – to sa vám podarilo. ';
-    if (total > 10) txt += 'Celkové skóre viac než 10: môžete dúfať v tvorivú budúcnosť.';
+    else if (multiDomain > 1) txt += 'Vo vašom veku je znakom výraznej tvorivosti dosiahnuť vo viacerých oblastiach skóre vyššie než 2 – to sa vám podarilo. ';
+    if (total > 10) txt += 'Ak ste dosiahli celkové skóre viac než 10, môžete dúfať v tvorivú budúcnosť.';
     if (txt) return '<div class="result-label" style="color:var(--terra); margin-top:0.5rem">' + txt + '</div>';
     return '';
   }
