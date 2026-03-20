@@ -1042,7 +1042,7 @@ function renderCAQ(part) {
 
 function validateSection(n) {
   const err = document.getElementById(`error-${n}`);
-  err.style.display = 'none';
+  if (err) err.style.display = 'none';
 
   if (n === 0) {
     const skola = document.getElementById('skola').value.trim();
@@ -1050,12 +1050,12 @@ function validateSection(n) {
     const vek = document.getElementById('vek').value.trim();
     const pohlavie = document.querySelector('input[name="pohlavie"]:checked');
     if (!skola || !vek || !pohlavie) {
-      err.style.display = 'block';
+      if (err) err.style.display = 'block';
       return false;
     }
     if (!kod || detectSchoolCode(skola) === null) {
       document.getElementById('error-0').textContent = 'Prosím, skontrolujte skratku školy – systém ju nerozpoznal.';
-      err.style.display = 'block';
+      if (err) err.style.display = 'block';
       return false;
     }
   }
@@ -1063,7 +1063,7 @@ function validateSection(n) {
   if (n === 1) {
     for (let i = 0; i < BRIEF2_ITEMS.length; i++) {
       if (!document.querySelector(`input[name="brief2_${i}"]:checked`)) {
-        err.style.display = 'block';
+        if (err) err.style.display = 'block';
         document.querySelector(`input[name="brief2_${i}"]`).closest('.question-block').scrollIntoView({behavior:'smooth', block:'center'});
         return false;
       }
@@ -1073,7 +1073,7 @@ function validateSection(n) {
   if (n === 2) {
     for (let i = 0; i < GRIT_ITEMS.length; i++) {
       if (!document.querySelector(`input[name="grit_${i}"]:checked`)) {
-        err.style.display = 'block';
+        if (err) err.style.display = 'block';
         return false;
       }
     }
@@ -1082,7 +1082,7 @@ function validateSection(n) {
   if (n === 3) {
     for (let i = 0; i < KDOCS_ITEMS.length; i++) {
       if (!document.querySelector(`input[name="kdocs_${i}"]:checked`)) {
-        err.style.display = 'block';
+        if (err) err.style.display = 'block';
         return false;
       }
     }
@@ -1091,7 +1091,7 @@ function validateSection(n) {
   if (n === 4) {
     for (let i = 0; i < BFI2_ITEMS.length; i++) {
       if (!document.querySelector(`input[name="bfi2_${i}"]:checked`)) {
-        err.style.display = 'block';
+        if (err) err.style.display = 'block';
         return false;
       }
     }
@@ -1099,7 +1099,7 @@ function validateSection(n) {
 
   if (n === 5) {
     const val = document.getElementById('aut-tehla').value.trim();
-    if (!val) { err.style.display = 'block'; return false; }
+    if (!val) { if (err) err.style.display = 'block'; return false; }
   }
 
   if (n === 8) {
