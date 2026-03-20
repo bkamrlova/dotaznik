@@ -1188,12 +1188,32 @@ function scoreGRIT() {
 }
 
 function scoreBRIEF2() {
+  const SCALES = {
+    'Inhibícia':                  [1,10,16,20,24,30,39,48,49],
+    'Sebamonitorovanie':          [4,13,26,40,45,50,51,53],
+    'Presúvanie pozornosti':      [2,11,17,31,40,45,50,51],
+    'Emočná kontrola':            [6,14,22,27,33,34,43],
+    'Dokončenie úlohy':           [3,9,12,19,23,25,32,38,41,42,44,46,55],
+    'Pracovná pamäť':             [5,7,8,15,21,28,29,35,37,46,47,52],
+    'Plánovanie a organizácia':   [14,19,21,23,25,35,37,47,52],
+  };
+  const scores = {};
   let total = 0;
   BRIEF2_ITEMS.forEach((_, i) => {
     const el = document.querySelector(`input[name="brief2_${i}"]:checked`);
     if (el) total += parseInt(el.value);
   });
-  return { total, max: BRIEF2_ITEMS.length * 3 };
+  for (const [name, items] of Object.entries(SCALES)) {
+    scores[name] = items.reduce((sum, num) => {
+      const el = document.querySelector(`input[name="brief2_${num-1}"]:checked`);
+      return sum + (el ? parseInt(el.value) : 0);
+    }, 0);
+  }
+  const BRI = scores['Inhibícia'] + scores['Sebamonitorovanie'];
+  const ERI = scores['Presúvanie pozornosti'] + scores['Emočná kontrola'];
+  const CRI = scores['Dokončenie úlohy'] + scores['Pracovná pamäť'] + scores['Plánovanie a organizácia'];
+  const GEC = BRI + ERI + CRI;
+  return { total, max: BRIEF2_ITEMS.length * 3, scales: scores, BRI, ERI, CRI, GEC };
 }
 
 function scoreKDOCS() {
@@ -1330,6 +1350,17 @@ function submitForm() {
     grit_perseverance: grit.perseverance,
     grit_consistency: grit.consistency,
     brief2_total: brief2.total,
+    brief2_inhibicia: brief2.scales['Inhibícia'],
+    brief2_sebamonitorovanie: brief2.scales['Sebamonitorovanie'],
+    brief2_presuvaniepoznornosti: brief2.scales['Presúvanie pozornosti'],
+    brief2_emocnakontrol: brief2.scales['Emočná kontrola'],
+    brief2_dokoncenieUlohy: brief2.scales['Dokončenie úlohy'],
+    brief2_pracovnapamat: brief2.scales['Pracovná pamäť'],
+    brief2_planovanie: brief2.scales['Plánovanie a organizácia'],
+    brief2_BRI: brief2.BRI,
+    brief2_ERI: brief2.ERI,
+    brief2_CRI: brief2.CRI,
+    brief2_GEC: brief2.GEC,
     kdocs_total: kdocs.total,
     aut_fluencia: aut.fluencia,
     caq_total: caq.total,
