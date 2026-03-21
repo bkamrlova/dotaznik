@@ -1053,9 +1053,6 @@ function validateSection(n) {
       if (err) err.style.display = 'block';
       return false;
     }
-    if (!kod || detectSchoolCode(skola) === null) {
-      document.getElementById('error-0').textContent = 'Prosím, skontrolujte skratku školy – systém ju nerozpoznal.';
-      if (err) err.style.display = 'block';
       return false;
     }
   }
@@ -1301,17 +1298,11 @@ function generateKod() {
     kodField.placeholder = 'Vygeneruje sa automaticky';
     return;
   }
-  const schoolCode = detectSchoolCode(skolaInput);
-  if (schoolCode === null) {
-    kodField.value = '';
-    kodField.placeholder = 'Škola nerozpoznaná – skúste iný tvar';
-    kodField.style.color = '#c0392b';
-    return;
-  }
-  // Generate random 3-digit number if not already set
+  const rawCode = detectSchoolCode(skolaInput) || 0;
+  const schoolCode = String(rawCode).padStart(2, '0');
   if (!kodField.dataset.generated || kodField.dataset.schoolCode != schoolCode) {
-    const rand = Math.floor(Math.random() * 900) + 100; // 100–999
-    kodField.value = '' + schoolCode + rand;
+    const rand = Math.floor(Math.random() * 900) + 100;
+    kodField.value = schoolCode + rand;
     kodField.dataset.generated = '1';
     kodField.dataset.schoolCode = schoolCode;
     kodField.style.color = 'var(--dark)';
