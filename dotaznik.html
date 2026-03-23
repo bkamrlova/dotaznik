@@ -1443,7 +1443,7 @@ function submitForm() {
   data['aut_odpovede'] = document.getElementById('aut-tehla').value.trim();
 
   // Send to Google Sheets (URL to be configured)
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3W0tsu2od_St0eT0CEhqaTpAvA0nos0anUoxHVVsziGiy-l1qLvxVHR-HpKdR10L-ow/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLNiu9OVfuSXHzM8hQl1W3i5YpxjFADtf8BJn_1hBBoAGgytFLQmov9E5XiKqeYfabrA/exec';
   if (SCRIPT_URL !== 'GOOGLE_SCRIPT_URL_HERE') {
     fetch(SCRIPT_URL, {
       method: 'POST',
