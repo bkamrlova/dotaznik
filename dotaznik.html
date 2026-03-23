@@ -1,3 +1,4 @@
+<!-- v2.1 -->
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -1308,6 +1309,63 @@ function generateKod() {
   }
 }
 
+
+function scoreBFI2() {
+  const DOMAINS = {
+    'Extraverzia': {
+      'Societalnost':    { items: [1,16,31,46],  rev: [31] },
+      'Asertivita':      { items: [6,21,36,51],  rev: [21] },
+      'Energia':         { items: [11,26,41,56], rev: [56] },
+    },
+    'Privetivost': {
+      'Sucitnot':        { items: [2,17,32,47],  rev: [17] },
+      'Uctivost':        { items: [7,22,37,52],  rev: [22] },
+      'Dovera':          { items: [12,27,42,57], rev: [27,42] },
+    },
+    'Svedomitost': {
+      'Organizovanost':  { items: [3,18,33,48],  rev: [18] },
+      'Produktivita':    { items: [8,23,38,53],  rev: [23] },
+      'Zodpovednost':    { items: [13,28,43,58], rev: [43] },
+    },
+    'NegativaEmocionalita': {
+      'Uzkostlivost':    { items: [4,19,34,49],  rev: [19] },
+      'Depresivita':     { items: [9,24,39,54],  rev: [9,24] },
+      'Emocna_labilita': { items: [14,29,44,59], rev: [14] },
+    },
+    'OtvorenaMysel': {
+      'Intelektualna_zvedavost': { items: [10,25,40,55], rev: [25,40] },
+      'Estetika':                { items: [5,20,35,50],  rev: [5,35] },
+      'Tvoriva_imaginacia':      { items: [15,30,45,60], rev: [30,45] },
+    },
+  };
+
+  function getVal(num) {
+    const el = document.querySelector(`input[name="bfi2_${num-1}"]:checked`);
+    return el ? parseInt(el.value) : 0;
+  }
+
+  const facets = {};
+  const domains = {};
+
+  for (const [dName, dFacets] of Object.entries(DOMAINS)) {
+    let dSum = 0;
+    for (const [fName, fData] of Object.entries(dFacets)) {
+      let fSum = 0;
+      for (const num of fData.items) {
+        const v = getVal(num);
+        fSum += fData.rev.includes(num) ? (6 - v) : v;
+      }
+      const fAvg = (fSum / fData.items.length).toFixed(2);
+      facets[`bfi2_${dName}_${fName}`] = fAvg;
+      dSum += fSum;
+    }
+    const allItems = Object.values(dFacets).flatMap(f => f.items).length;
+    domains[`bfi2_${dName}`] = (dSum / allItems).toFixed(2);
+  }
+
+  return { ...domains, ...facets };
+}
+
 function submitForm() {
   if (!validateSection(8)) return;
 
@@ -1363,6 +1421,7 @@ function submitForm() {
     caq_veda: caq.byArea[8].score,
     caq_divadlo: caq.byArea[9].score,
     caq_varenie: caq.byArea[10].score,
+    ...scoreBFI2(),
   };
 
   // Add individual item responses
